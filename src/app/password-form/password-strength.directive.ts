@@ -19,13 +19,13 @@ export const passwordStrengthValidator = (): ValidatorFn => {
 
     const testPassword = test(password);
 
-    const typesCount = [hasLettersRegEx, hasNumbersRegEx, hasSymbolsRegEx]
+    const strengthLevelId = [hasLettersRegEx, hasNumbersRegEx, hasSymbolsRegEx]
       .map((regEx) => testPassword(regEx))
       .filter(Boolean).length;
 
-    if (typesCount === 3) {
+    if (strengthLevelId === 3) {
       return null;
-    } else if (typesCount === 2) {
+    } else if (strengthLevelId === 2) {
       return { medium: true };
     } else {
       return { easy: true };

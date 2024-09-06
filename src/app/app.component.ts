@@ -1,6 +1,4 @@
 import { Component } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { BrowserModule } from '@angular/platform-browser';
 import { PasswordFormComponent } from './password-form/password-form';
 
 @Component({
@@ -9,4 +7,6 @@ import { PasswordFormComponent } from './password-form/password-form';
   imports: [PasswordFormComponent],
   templateUrl: './app.component.html',
 })
-export class AppComponent {}
+export class AppComponent {
+  title = 'Hello, Usense Team!';
+}

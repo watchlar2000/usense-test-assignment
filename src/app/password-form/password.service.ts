@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import {
   CalculatePasswordStrengthLevels,
+  GetLevelClass,
   PasswordStrengthLevel,
   PasswordStrengthLevelList,
 } from './types';
@@ -28,32 +29,6 @@ export class PasswordService {
       ...level,
       isActive: level.id <= strengthId,
     }));
-  }
-
-  getLevelClass({
-    level,
-    password,
-  }: {
-    level: PasswordStrengthLevel;
-    password: FormControl<string | null>;
-  }) {
-    if (password.valid) {
-      return 'text-green-700';
-    } else if (
-      level.isActive &&
-      !password.hasError('minlength') &&
-      password.dirty
-    ) {
-      return 'text-yellow-500';
-    }
-    return '';
-  }
-
-  getStrengthLevelId(
-    index: number,
-    strengthLevel: PasswordStrengthLevel
-  ): number {
-    return strengthLevel.id;
   }
 
   mapPasswordStrengthLevels(

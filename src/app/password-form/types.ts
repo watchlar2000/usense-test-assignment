@@ -16,3 +16,10 @@ export type CalculatePasswordStrengthLevels = {
   password: FormControl<string | null>;
   levelList: PasswordStrengthLevel[];
 };
+
+export type PasswordProcessStatus = 'SAVING' | null;
+
+export type GetLevelClass = {
+  level: PasswordStrengthLevel;
+  password: FormControl<string | null>;
+};
