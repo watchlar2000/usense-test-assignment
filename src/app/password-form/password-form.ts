@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
+import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
+import { ButtonComponent } from '../shared/button/button';
 import { passwordStrengthValidator } from './password-strength.directive';
 
 const MIN_PASSWORD_LENGTH = 8 as const;
@@ -13,6 +14,8 @@ interface PasswordStrengthLevel {
 
 @Component({
   selector: 'app-password-form',
+  standalone: true,
+  imports: [ButtonComponent, ReactiveFormsModule],
   templateUrl: './password-form.component.html',
 })
 export class PasswordFormComponent implements OnInit {
