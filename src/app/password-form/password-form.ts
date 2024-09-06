@@ -43,6 +43,11 @@ export class PasswordFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.password.valueChanges.subscribe((value) => {
+      const trimmedValue = (value || '').trim();
+      if (this.password.value !== trimmedValue) {
+        this.password.setValue(trimmedValue, { emitEvent: false });
+      }
+
       this.passwordStrengthLevels =
         this.passwordService.calculatePasswordStrengthLevels({
           password: this.password,

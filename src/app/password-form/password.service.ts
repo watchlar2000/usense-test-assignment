@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
-import { FormControl } from '@angular/forms';
 import {
   CalculatePasswordStrengthLevels,
-  GetLevelClass,
   PasswordStrengthLevel,
   PasswordStrengthLevelList,
 } from './types';
@@ -15,7 +13,8 @@ export class PasswordService {
     password,
     levelList,
   }: CalculatePasswordStrengthLevels): PasswordStrengthLevel[] {
-    const isPasswordEmpty = !password.value;
+    const trimmedPassword = password?.value?.trim();
+    const isPasswordEmpty = !trimmedPassword;
 
     let strengthId: number = 0;
 
@@ -32,7 +31,7 @@ export class PasswordService {
   }
 
   mapPasswordStrengthLevels(
-    leveList: PasswordStrengthLevelList
+    leveList: PasswordStrengthLevelList,
   ): PasswordStrengthLevel[] {
     return leveList.map((item, index) => ({
       id: index + 1,

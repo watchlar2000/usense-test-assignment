@@ -15,20 +15,20 @@ export class PasswordStrengthListComponent {
 
   getLevelClass({ level, password }: GetLevelClass) {
     if (password.valid) {
-      return 'text-green-700';
+      return 'text-green-700 bg-green-100';
     } else if (
       level.isActive &&
       !password.hasError('minlength') &&
       password.dirty
     ) {
-      return 'text-yellow-500';
+      return 'text-orange-500 !bg-yellow-100';
     }
     return '';
   }
 
   getStrengthLevelId(
     index: number,
-    strengthLevel: PasswordStrengthLevel
+    strengthLevel: PasswordStrengthLevel,
   ): number {
     return strengthLevel.id;
   }

@@ -23,3 +23,8 @@ export type GetLevelClass = {
   level: PasswordStrengthLevel;
   password: FormControl<string | null>;
 };
+
+export type MatchesRegex = {
+  value: string;
+  regEx: RegExp;
+};

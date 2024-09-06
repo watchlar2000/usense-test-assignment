@@ -1,8 +1,11 @@
-<main class="bg-purple-200 min-h-screen p-6">
-  <div
-    class="mx-auto max-w-lg bg-white p-8 rounded-xl shadow-lg border border-gray-300"
-  >
-    <h1 class="text-blue-600 font-extrabold text-3xl mb-4">{{ title }}</h1>
-    <app-password-form class="mt-4" />
+<main class="min-h-screen bg-purple-200 p-4 md:p-6">
+  <div class="mx-auto sm:max-w-full md:max-w-[500px]">
+    <h1 class="text-3xl font-bold text-blue-600">{{ title }}</h1>
+    <app-assignment-accordion />
+    <div
+      class="mt-4 rounded-xl border border-gray-300 bg-white px-6 py-5 shadow-lg"
+    >
+      <app-password-form />
+    </div>
   </div>
 </main>

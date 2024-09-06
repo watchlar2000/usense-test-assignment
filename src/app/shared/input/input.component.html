@@ -2,7 +2,7 @@
   [for]="config.for"
   [ngClass]="[
     'block text-sm font-medium leading-6 text-gray-900',
-    config.classLabel ?? ''
+    config.classLabel ?? '',
   ]"
 >
   {{ config.label }}
@@ -12,8 +12,8 @@
   [name]="config.name"
   [id]="config.id"
   [ngClass]="[
-    'block w-full rounded-md border-0 py-1.5 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6',
-    config.classInput ?? ''
+    'block w-full rounded-md border-0 px-3 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6',
+    config.classInput ?? '',
   ]"
   [placeholder]="config.placeholder"
   [formControl]="formControl"

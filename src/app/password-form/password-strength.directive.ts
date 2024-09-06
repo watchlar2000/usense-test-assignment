@@ -6,22 +6,13 @@ import {
   Validator,
   ValidatorFn,
 } from '@angular/forms';
+import { determineStrengthLevel } from './utils';
 
 export const passwordStrengthValidator = (): ValidatorFn => {
   return (control: AbstractControl): ValidationErrors | null => {
     const password = control.value;
 
-    const hasLettersRegEx = /[a-zA-Z]/;
-    const hasNumbersRegEx = /\d/;
-    const hasSymbolsRegEx = /[!@#$%^&*(),.?":{}|<>]/;
-
-    const test = (value: string) => (regEx: RegExp) => regEx.test(value);
-
-    const testPassword = test(password);
-
-    const strengthLevelId = [hasLettersRegEx, hasNumbersRegEx, hasSymbolsRegEx]
-      .map((regEx) => testPassword(regEx))
-      .filter(Boolean).length;
+    const strengthLevelId = determineStrengthLevel(password);
 
     if (strengthLevelId === 3) {
       return null;
