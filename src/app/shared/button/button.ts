@@ -1,12 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import clsx from 'clsx';
 
-interface Config {
-  title: string;
+type Config = {
+  label: string;
   disabled?: boolean;
   class?: string;
-}
+};
 
 @Component({
   selector: 'app-button',
@@ -16,10 +15,8 @@ interface Config {
 })
 export class ButtonComponent {
   @Input() config: Config = {
-    title: 'Button',
+    label: 'Button',
   };
-
-  clsx = clsx;
 
   @Output() clickEvent = new EventEmitter<void>();
 

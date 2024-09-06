@@ -1,30 +1,28 @@
-import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Component, forwardRef, inject, OnInit } from '@angular/core';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ButtonComponent } from '../shared/button/button';
+import { InputComponent } from '../shared/input/input.component';
 import { passwordStrengthValidator } from './password-strength.directive';
-
-const MIN_PASSWORD_LENGTH = 8 as const;
-const passwordStrengthLevelList = ['Easy', 'Medium', 'Strong'] as const;
-type StrengthLevel = (typeof passwordStrengthLevelList)[number];
-interface PasswordStrengthLevel {
-  id: number;
-  name: StrengthLevel;
-  isActive: boolean;
-}
+import { PasswordService } from './password.service';
+import {
+  MIN_PASSWORD_LENGTH,
+  PasswordStrengthLevel,
+  passwordStrengthLevelList,
+} from './types';
 
 @Component({
   selector: 'app-password-form',
   standalone: true,
-  imports: [ButtonComponent, ReactiveFormsModule],
+  imports: [CommonModule, ButtonComponent, ReactiveFormsModule, InputComponent],
   templateUrl: './password-form.component.html',
+  providers: [PasswordService],
 })
 export class PasswordFormComponent implements OnInit {
+  passwordService = inject(PasswordService);
+
   passwordStrengthLevels: PasswordStrengthLevel[] =
-    passwordStrengthLevelList.map((item, index) => ({
-      id: index + 1,
-      name: item,
-      isActive: false,
-    }));
+    this.passwordService.mapPasswordStrengthLevels(passwordStrengthLevelList);
 
   password = new FormControl('', [
     Validators.required,
@@ -34,32 +32,18 @@ export class PasswordFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.password.valueChanges.subscribe((value) => {
-      const password = value ?? '';
       this.passwordStrengthLevels =
-        this.calculatePasswordStrengthLevels(password);
+        this.passwordService.calculatePasswordStrengthLevels({
+          password: this.password,
+          levelList: this.passwordStrengthLevels,
+        });
     });
-  }
-
-  calculatePasswordStrengthLevels(password: string): PasswordStrengthLevel[] {
-    const strengthId = this.passwordStrengthLevels.reduce(
-      (currentMaxId, element) => {
-        const key = element.name.toLowerCase();
-        return this.password.hasError(key) ? element.id : currentMaxId;
-      },
-      0
-    );
-
-    return this.passwordStrengthLevels.map((level) => ({
-      ...level,
-      isActive: level.id <= strengthId,
-    }));
   }
 
   save() {
     alert('Password saved');
     this.reset();
   }
-
   reset() {
     this.password.reset();
   }
